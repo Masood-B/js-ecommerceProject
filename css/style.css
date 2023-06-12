@@ -1,0 +1,56 @@
+*,
+*::after,
+*::before{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box  ;
+  }
+  
+  /* logo */
+  img[alt="Logo"]{
+      width:5rem;
+      border-radius: 1rem;
+  }
+
+  /* body */
+  body{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+/* navbar color */
+#nav-color{
+  background-color: rgba(87, 100, 140);
+}
+
+/* link (home page) */
+#go_down_FP, #go_next_PG{
+  color: black;
+  border: 2px solid black;
+  text-decoration: none;
+  border-radius: 2rem;
+}
+
+/* Draw Line (home page) */
+#line_through {
+  border-top: 2px solid black;
+  margin-bottom: 2rem;
+  margin: 3rem;
+}
+
+/*  */
+#landing-page{
+  height: 90vh;
+  width: 100%;
+}
+#featurePoducts{
+  height: 90vh;
+  width:100%;
+}
+
+/* .wrapper{
+  flex: 1;
+} */
+/* colors rgb (87, 100, 140), (147, 74, 95), (194, 180, 214), (229, 229, 229)  */
