@@ -34,7 +34,20 @@ displayAdd.innerHTML =
 </div>
 `;
 
-// My Product Items
+
+// Name, Price, Image, Add, Edit and Delete
+const addBtn = document.querySelector("#add-btn") // add button from modal
+const saveName = document.querySelector("#input1"); // Name input
+const savePrice = document.querySelector("#input2"); // Price input
+const savePicture = document.querySelector("#input3"); // Picture input
+const saveDescription = document.querySelector("#input4"); // Description input
+const result = document.querySelector("#data") //display list
+let productList = JSON.parse(localStorage.getItem('product-list')) ? JSON.parse(localStorage.getItem('product-list')) : []; // info
+let productID = productList[productList.length-1] ? productList[productList.length-1].id + 1: 1; // ID number
+let deleteBtn; // Delete button
+let editBtn; // edit button
+
+// Admin Items
 let products = [
     {
     id: 1,
@@ -78,27 +91,16 @@ let products = [
     }
 ]
 
-// Name, Price, Image, Add, Edit and Delete
-const addBtn = document.querySelector("#add-btn") // add button from modal
-const saveName = document.querySelector("#input1"); // Name input
-const savePrice = document.querySelector("#input2"); // Price input
-const savePicture = document.querySelector("#input3"); // Picture input
-const saveDescription = document.querySelector("#input4"); // Description input
-const result = document.querySelector("#data") //display list
-let productList = JSON.parse(localStorage.getItem('product-list')) ? JSON.parse(localStorage.getItem('product-list')) : []; // info
-let productID = productList[productList.length-1] ? productList[productList.length-1].id + 1: 1; // ID number
-let deleteBtn; // Delete button
-let editBtn; // edit button
 
 // add button
 addBtn.addEventListener("click", addItem);
-
+result.innerHTML = "";
 function addItem(){
     event.preventDefault();
     if(saveName.value, savePrice.value, savePicture.value, saveDescription.value == ""){
         alert("You Forgot To Add!")
     }else{
-        productList.push({
+        products.push({
             id: productID,
             name: saveName.value,
             price: savePrice.value ,
@@ -113,7 +115,21 @@ function addItem(){
     }
 }
 
+// delete button
+function deleteButton(){
+    deleteBtn = [...document.querySelectorAll(".close-btn")];
+    deleteBtn.forEach((item)=>{
+        item.addEventListener('click',deleteItem)
+    })
+}
+function deleteItem(){
+    let startPoint = deleteBtn.indexOf(event.target);
+    productList.splice(startPoint, 1);
+    localStorage.setItem("product-list", JSON.stringify(productList));
+    displayProduct();
+}
 
+// Main Function
 function displayProduct(){
     result.innerHTML = "";
 products.forEach((stock)=>{
@@ -124,12 +140,41 @@ products.forEach((stock)=>{
         <td>${stock.price}</td>
         <td><img src="${stock.picture}" alt="${stock.name}" loading="lazy"></td>
         <td>${stock.description}</td>
-        <td><button>add</button></td>
-        <td><button>delete</button></td>
+        <td><!-- Button trigger modal -->
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Edit
+        </button>
+        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Name</p>
+                <input type="text"class="modal-input" placeholder="Enter Title.." id="input1">
+                <p>Price</p>
+                <input type="text" class="modal-input"  placeholder="Enter Your Amount.." id="input2">
+                <p>Picture</p>
+                <input type="text" class="modal-input"  placeholder="Enter Image URL.." id="input3">
+                <p>Despcription</p>
+                <input type="text" class="modal-input"  placeholder="Enter Description.." id="input4">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-dark" id="add-btn">Add New Manga</button>
+              </div>
+            </div>
+          </div>
+        </div></td>
+        <td><button id="close-btn${stock.id}" class="close-btn">Delete</button></td>
     </tr>
     `
 })
-
+deleteButton();
 }
 
 displayProduct();
