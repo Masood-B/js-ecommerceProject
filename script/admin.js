@@ -16,14 +16,14 @@ displayAdd.innerHTML =
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>Name</p>
-        <input type="text"class="modal-input" placeholder="Enter Title.." id="input1">
-        <p>Price</p>
-        <input type="text" class="modal-input"  placeholder="Enter Your Amount.." id="input2">
-        <p>Picture</p>
-        <input type="text" class="modal-input"  placeholder="Enter Image URL.." id="input3">
-        <p>Despcription</p>
-        <input type="text" class="modal-input"  placeholder="Enter Description.." id="input4">
+      <p>Name</p>
+      <input type="text" class="form-control" placeholder="Enter Title.." id="input1" aria-label="Title">
+      <p>Price</p>
+      <input type="text" class="form-control" placeholder="Enter Your Amount.." id="input2" aria-label="Title">
+      <p>Picture</p>
+      <input type="text" class="form-control" placeholder="Enter Image URL.." id="input3" aria-label="Title">
+      <p>Despcription</p>
+      <textarea class="form-control" placeholder="Enter Description.." id="input4" aria-label="With textarea"></textarea>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -90,14 +90,15 @@ let products = [
     date: new Date()
     }
 ]
-
+localStorage.setItem("save-key", JSON.stringify(products));
+JSON.parse(localStorage.getItem("save-key"));
 
 // add button
 addBtn.addEventListener("click", addItem);
 result.innerHTML = "";
 function addItem(){
     event.preventDefault();
-    if(saveName.value, savePrice.value, savePicture.value, saveDescription.value == ""){
+    if(saveName.value == "", savePrice.value == "", savePicture.value == "", saveDescription.value == ""){
         alert("You Forgot To Add!")
     }else{
         products.push({
@@ -109,10 +110,21 @@ function addItem(){
             date: new Date()
         });
         productID++;
-        saveName.value, savePrice.value, savePicture.value, saveDescription.value = "";
+        saveName.value = "", savePrice.value = "", savePicture.value = "", saveDescription.value = "";
         localStorage.setItem("product-list", JSON.stringify(productList));
         displayProduct();
     }
+}
+
+// Edit Button
+function editItem(){
+  editBtn = [...document.querySelectorAll("#edit-btn")];
+  editBtn.forEach((item)=>{
+    item.addEventListener("click", editingProduct)
+  })
+}
+function editingProduct(){
+  
 }
 
 // delete button
@@ -131,48 +143,53 @@ function deleteItem(){
 
 // Main Function
 function displayProduct(){
-    result.innerHTML = "";
+  result.innerHTML = "";
 products.forEach((stock)=>{
-    result.innerHTML += 
-    `
-    <tr>
-        <td>${stock.name}</td>
-        <td>${stock.price}</td>
-        <td><img src="${stock.picture}" alt="${stock.name}" loading="lazy"></td>
-        <td>${stock.description}</td>
-        <td><!-- Button trigger modal -->
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-          Edit
-        </button>
-        
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  result.innerHTML += 
+  `
+  <tr>
+      <td>${stock.name}</td>
+      <td>${stock.price}</td>
+      <td>
+      <div class="flex-wrap">
+      <img src="${stock.picture}" alt="${stock.id}" loading="lazy">
+      </div>
+      </td>
+      <td>${stock.description}</td>
+      <td>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct${stock.id}">Edit</button>
+      <!-- Modal -->
+      <div class="modal fade" id="editProduct${stock.id}" tabindex="-1" aria-labelledby="editProductLabel${stock.id}" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="editProductLabel${stock.id}">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form>
+            <div class="container">
+              <p>Name</p>
+              <input type="text" class="form-control" placeholder="Enter Title..." id="input1" value="${stock.name}" aria-label="Title">
+              <p>Price</p>
+              <input type="text" class="form-control" placeholder="Enter Your Amount..." id="input2" value="${stock.price}" aria-label="Price">
+              <p>Picture</p>
+              <input type="text" class="form-control" placeholder="Enter Image URL..." id="input3" value="${stock.picture}" aria-label="Picture">
+              <p>Despcription</p>
+              <textarea class="form-control" placeholder="Enter Description..." id="input4" aria-label="Description">${stock.description}</textarea>
               </div>
-              <div class="modal-body">
-                <p>Name</p>
-                <input type="text"class="modal-input" placeholder="Enter Title.." id="input1">
-                <p>Price</p>
-                <input type="text" class="modal-input"  placeholder="Enter Your Amount.." id="input2">
-                <p>Picture</p>
-                <input type="text" class="modal-input"  placeholder="Enter Image URL.." id="input3">
-                <p>Despcription</p>
-                <input type="text" class="modal-input"  placeholder="Enter Description.." id="input4">
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-dark" id="add-btn">Add New Manga</button>
-              </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-dark" id="edit-btn">Edit Manga</button>
             </div>
           </div>
-        </div></td>
-        <td><button id="close-btn${stock.id}" class="close-btn">Delete</button></td>
-    </tr>
-    `
+        </div>
+      </div></td>
+      <td><button id="close-btn${stock.id}" class="close-btn">Delete</button></td>
+  </tr>
+  `
 })
 deleteButton();
 }
