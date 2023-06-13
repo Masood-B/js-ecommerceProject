@@ -19,7 +19,7 @@ displayAdd.innerHTML =
       <p>Name</p>
       <input type="text" class="form-control" placeholder="Enter Title.." id="input1" aria-label="Title">
       <p>Price</p>
-      <input type="text" class="form-control" placeholder="Enter Your Amount.." id="input2" aria-label="Title">
+      <input type="number" class="form-control" placeholder="Enter Your Amount.." id="input2" aria-label="Title">
       <p>Picture</p>
       <input type="text" class="form-control" placeholder="Enter Image URL.." id="input3" aria-label="Title">
       <p>Despcription</p>
@@ -157,7 +157,7 @@ function displayProduct(){
   `
   <tr>
       <td>${stock.name}</td>
-      <td>${stock.price}</td>
+      <td>R${stock.price}</td>
       <td>
       <div class="flex-wrap">
       <img src="${stock.picture}" alt="${stock.id}" loading="lazy">
@@ -180,7 +180,7 @@ function displayProduct(){
               <p>Name</p>
               <input type="text" class="form-control" placeholder="Enter Title..." id="nameInput" value="${stock.name}" aria-label="Title" required>
               <p>Price</p>
-              <input type="text" class="form-control" placeholder="Enter Your Amount..." id="priceInput" value="${stock.price}" aria-label="Price" required>
+              <input type="number" class="form-control" placeholder="Enter Your Amount..." id="priceInput" value="${stock.price}" aria-label="Price" required>
               <p>Picture</p>
               <input type="text" class="form-control" placeholder="Enter Image URL..." id="pictureInput" value="${stock.picture}" aria-label="Picture" required>
               <p>Despcription</p>
