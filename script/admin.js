@@ -119,6 +119,7 @@ function removeProduct(event){
 
 // Main Function
 function displayProduct(){
+  try{
   result.innerHTML = "";
   products.forEach((stock)=>{
   result.innerHTML += 
@@ -167,8 +168,12 @@ function displayProduct(){
   </tr>
   `
 });
-deleteButton()
+
+}catch(event) {
+  throw ("go to products then back to admin");
 }
+deleteButton()
+};
 
 displayProduct();
 

@@ -42,9 +42,90 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         picture:"https://i.postimg.cc/QxwJvHfc/Volume-01.webp",
         description: "school samurai girl",
         date: new Date()
+        },
+        {
+        id: 6,
+        name:"To Love Ru Darkness",
+        price: 450,
+        picture:"https://i.postimg.cc/Fs6B882b/to-love-ru-darkness-vol-1.jpg",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 7,
+        name:"Keijo!!!!!!!!",
+        price: 450,
+        picture:"https://i.postimg.cc/Y9CWYrtQ/Volume-10.webp",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 8,
+        name:"Medoka Box ",
+        price: 450,
+        picture:"https://i.postimg.cc/SQV9Sz7V/Volume16.webp",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 9,
+        name:"Is It Wrong to Try to Pick Up Girls in a Dungeon",
+        price: 450,
+        picture:"https://i.postimg.cc/T1pccY2z/is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon-vol-6-manga-2.jpg",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 10,
+        name:"Rosaria + Vampire",
+        price: 450,
+        picture:"https://i.postimg.cc/s2m9dZMF/Getimage-aspx.webp",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 11,
+        name:"Food Wars!",
+        price: 450,
+        picture:"https://i.postimg.cc/9XKPh2Qf/food-wars-shokugeki-no-soma-vol-26-9781974701018-hr.jpg",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 12,
+        name:"Air Gear",
+        price: 450,
+        picture:"https://i.postimg.cc/tRKvpwq9/air-gear-28.jpg",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 13,
+        name:"Kimi No Iru Machi",
+        price: 450,
+        picture:"https://i.postimg.cc/DzwBxKgP/9784063950298-us.jpg",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 14,
+        name:"High School of The Dead",
+        price: 450,
+        picture:"https://i.postimg.cc/GpgzNSgw/9780316282598_p0_v1_s1200x630.jpg",
+        description: "",
+        date: new Date()
+        },
+        {
+        id: 15,
+        name:"Love Hina",
+        price: 450,
+        picture:"https://i.postimg.cc/zBLp1S4L/1851952-09.jpg",
+        description: "",
+        date: new Date()
         }
     ]
-    )) 
+    
+    )) ;
 
 let sortbutton = document.querySelector(".sort")
 sortbutton.innerHTML = `
@@ -58,22 +139,17 @@ try{
     divBooks.innerHTML = "";
     products.forEach((reader)=> {
         divBooks.innerHTML += `
-        <div class="cards-wrapper">
-        <div>
-        <h2>${reader.name}</h2>
-        </div>
-        <div class= "card-image">
-        <img src="${reader.picture}" alt="${reader.name}" loading="lazy" class="img-fluid">
-        <div>
-        <p class="lead">${reader.description}</p>
-        </div>
-        <button class"btn">Add to cart</button>
-        </div>
-        <div>
-        <p>Price: R${reader.price}</p>
-        </div>
-        </div>
+   <div class="card" style="width: 15rem;">
+  <img src="${reader.picture}" class="card-img-top" alt="${reader.name}"  loading="lazy" class="img-fluid">
+  <div class="card-body">
+    <h5 class="card-title">${reader.name}</h5>
+    <p class="lead card-text">${reader.description}</p>
+    <p class="lead card-text">Price: R${reader.price}</p>
+    <a href="#" class="btn btn-primary">To Cart</a>
+  </div>
+</div>
         `
+        
     })
 }catch(event) {
     location.reload()
