@@ -2,6 +2,7 @@
 let displayAdd = document.querySelector(".display-Add");
 displayAdd.innerHTML = 
 `
+<button class="btn" id="adminSort">sort</button>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add
@@ -27,7 +28,7 @@ displayAdd.innerHTML =
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-dark" id="add-btn">Add New Manga</button>
+        <button type="button" class="btn btn-dark" id="add-btn" data-bs-dismiss="modal">Add New Manga</button>
       </div>
     </div>
   </div>
@@ -35,9 +36,11 @@ displayAdd.innerHTML =
 `;
 
 
-// Name, Price, Image, Add, Edit and Delete
+// Add, Name, Sort, Price, Image, Description, Edit and Delete
 const addBtn = document.querySelector("#add-btn") // add button from modal
 const saveName = document.querySelector("#input1"); // Name input
+const sortBtn = document.querySelector("#adminSort"); // Sort button
+let arrange = false; // for sort function (boolean)
 const savePrice = document.querySelector("#input2"); // Price input
 const savePicture = document.querySelector("#input3"); // Picture input
 const saveDescription = document.querySelector("#input4"); // Description input
@@ -46,52 +49,6 @@ let products = JSON.parse(localStorage.getItem('product-list')); // info
 let productID = products[products.length-1] ? products[products.length-1].id + 1: 1; // ID number
 let deleteBtn; // Delete button
 let editBtn; // edit button
-
-// Admin Items
-// let products = [
-//     {
-//     id: 1,
-//     name:"Monster Musume no Iru Nichijou",
-//     price:"R 399",
-//     picture:"https://i.postimg.cc/Xqc6mRbC/Monster-Musume-volume-1-cover.png",
-//     description: "Snake girl and guy",
-//     date: new Date()
-//     },
-//     {
-//     id: 2,
-//     name: "No Game No Life",
-//     price:"R 499",
-//     picture:"https://i.postimg.cc/Wp6RNcBD/no-game-no-life-vol-1-2.jpg",
-//     description: "brother and sister",
-//     date: new Date()
-//     },
-//     {
-//     id: 3,
-//     name:"Yuragi-sou no Yuuna-san",
-//     price:"R 299",
-//     picture:"https://i.postimg.cc/TPm7trGy/sk1g6a44e3121.jpg",
-//     description: "cat girl and human girl",
-//     date: new Date()
-//     },
-//     {
-//     id: 4,
-//     name:"Saikin Yatotta Maid ga Ayashii",
-//     price:"R 399",
-//     picture:"https://i.postimg.cc/2jTH9jpx/the-maid-i-hired-recently-is-mysterious-vol-2.jpg",
-//     description: "maid",
-//     date: new Date()
-//     },
-//     {
-//     id: 5,
-//     name:"Mato Seihei no Slave",
-//     price:"R 299",
-//     picture:"https://i.postimg.cc/QxwJvHfc/Volume-01.webp",
-//     description: "school samurai girl",
-//     date: new Date()
-//     }
-// ]
-// localStorage.setItem("save-key", JSON.stringify(products));
-// JSON.parse(localStorage.getItem("save-key"));
 
 // add button
 addBtn.addEventListener("click", addItem);
@@ -116,37 +73,50 @@ function addItem(event){
     }
 }
 
-// Edit Button
-function editItem(){
-  editBtn = [...document.querySelectorAll("#edit-btn")];
-  editBtn.forEach((item)=>{
-    item.addEventListener("click", EditingProduct)
-  })
-}
-function EditingProduct(){
-  this.id = item.id;
-  this.name = document.querySelector("#nameInput").value;
-  this.price = document.querySelector("#priceInput").value;
-  this.picture = document.querySelector("#pictureInput").value;
-  this.description = document.querySelector("#descriptionInput").value;
-  let index = editBtn.indexOf(event,target);
-  products[index] = {id: this.id, name: this.name, price: this.price.name, description: this.description};
+// sort button
+sortBtn.addEventListener("click",(event)=>{
+  event.preventDefault();
+  if(arrange){
+    products.sort((a, b)=> b.price - a.price);
+    sortBtn.textContent = "High"
+    arrange = false;
+  }else{
+    products.sort((a, b)=> a.price - b.price);
+    sortBtn.textContent = "low"
+    arrange = true;
+  }
+  displayProduct();
+})
+
+// // Edit Button
+function EditItem(stock){
+  this.name = document.querySelector(`#nameInput${stock.id}`).value;
+  this.price = document.querySelector(`#priceInput${stock.id}`).value;
+  this.picture = document.querySelector(`#pictureInput${stock.id}`).value;
+  this.description = document.querySelector(`#descriptionInput${stock.id}`).value;
+  let change = products.findIndex(a =>{
+    return a.id == item.id
+  });
+  products[change] = {id: this.id, name: this.name, price: this.price, description: this.description};
   localStorage.setItem("product-list", JSON.stringify(products));
   displayProduct();
+location.reload();
 }
 
 // delete button
-function deleteButton(){
-    deleteBtn = [...document.querySelectorAll(".close-btn")];
-    deleteBtn.forEach((item)=>{
-        item.addEventListener('click',deleteItem)
-    })
+function deleteButton(item){
+remove = [...document.querySelectorAll("#close-btn")];
+remove.forEach((item)=>{
+  item.addEventListener('click', removeProduct)
+
+})
+function removeProduct(event){
+  result.innerHTML = ""
+  let start = remove.indexOf(event.target);
+  products.splice(start, 1);
+  localStorage.setItem("product-list", JSON.stringify(products))
+  displayProduct();
 }
-function deleteItem(){
-    let startPoint = deleteBtn.indexOf(event.target);
-    products.splice(startPoint, 1);
-    localStorage.setItem("product-list", JSON.stringify(products));
-    displayProduct();
 }
 
 // Main Function
@@ -167,47 +137,40 @@ function displayProduct(){
       <td>
       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target='#${stock.id}'>Edit</button>
       <!-- Modal -->
-      <div class="modal fade" id='${stock.id}' tabindex="-1" aria-labelledby="editProductLabel${stock.id}" aria-hidden="true">
+      <div class="modal fade" id='${stock.id}' tabindex="-1" aria-labelledby="editProductLabel " aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h1 class="modal-title fs-5" id="editProductLabel${stock.id}">Edit</h1>
+              <h1 class="modal-title fs-5" id="editProductLabel ">Edit</h1>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
             <form>
             <div class="container">
               <p>Name</p>
-              <input type="text" class="form-control" placeholder="Enter Title..." id="nameInput" value="${stock.name}" aria-label="Title" required>
+              <input type="text" class="form-control" placeholder="Enter Title..." id="nameInput${stock.id}" value="${stock.name}" aria-label="Title" required>
               <p>Price</p>
-              <input type="number" class="form-control" placeholder="Enter Your Amount..." id="priceInput" value="${stock.price}" aria-label="Price" required>
+              <input type="number" class="form-control" placeholder="Enter Your Amount..." id="priceInput${stock.id}" value="${stock.price}" aria-label="Price" required>
               <p>Picture</p>
-              <input type="text" class="form-control" placeholder="Enter Image URL..." id="pictureInput" value="${stock.picture}" aria-label="Picture" required>
+              <input type="text" class="form-control" placeholder="Enter Image URL..." id="pictureInput${stock.id}" value="${stock.picture}" aria-label="Picture" required>
               <p>Despcription</p>
-              <textarea class="form-control" placeholder="Enter Description..." id="descriptionInput" aria-label="Description" required>${stock.description}</textarea>
+              <textarea class="form-control" placeholder="Enter Description..." id="descriptionInput${stock.id}" aria-label="Description" required>${stock.description}</textarea>
               </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-dark" id="edit-btn">Edit Manga</button>
+              <button type="button" class="btn btn-dark" id="edit-btn" onclick="new EditItem(${JSON.stringify(stock)})" data-bs-dismiss="modal">Edit Manga</button>
             </div>
           </div>
         </div>
       </div></td>
-      <td><button id="close-btn${stock.id}" class="close-btn">Delete</button></td>
+      <td><button id="close-btn" class="close-btn">Delete</button></td>
   </tr>
   `
-})
-deleteButton();
-editItem();
+});
+deleteButton()
 }
 
 displayProduct();
 
-function deleteItem(item) {
-  let index = products.findIndex( p=> p.id == item.id)
-  products.splice()
-  localStorage.setItem('', JSON.stringify(products))
-  displayProduct()
-}
