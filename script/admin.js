@@ -47,7 +47,6 @@ const saveDescription = document.querySelector("#input4"); // Description input
 const result = document.querySelector("#data") //display list
 let products = JSON.parse(localStorage.getItem('product-list')); // info
 let productID = products[products.length-1] ? products[products.length-1].id + 1: 1; // ID number
-let deleteBtn; // Delete button
 let editBtn; // edit button
 
 // add button
@@ -59,14 +58,13 @@ function addItem(event){
         alert("You Forgot To Add!")
     }else{
         products.push({
-            id: products.length,
+            id: products[products.length-1] ? products[products.length-1].id + 1: 1,
             name: saveName.value,
             price: savePrice.value ,
             picture: savePicture.value,
             description: saveDescription.value,
             date: new Date()
         });
-        // productID++;
         saveName.value = "", savePrice.value = "", savePicture.value = "", saveDescription.value = "";
         localStorage.setItem("product-list", JSON.stringify(products));
         displayProduct();
@@ -88,19 +86,19 @@ sortBtn.addEventListener("click",(event)=>{
   displayProduct();
 })
 
-// // Edit Button
+// Edit Button
 function EditItem(stock){
   this.name = document.querySelector(`#nameInput${stock.id}`).value;
   this.price = document.querySelector(`#priceInput${stock.id}`).value;
   this.picture = document.querySelector(`#pictureInput${stock.id}`).value;
   this.description = document.querySelector(`#descriptionInput${stock.id}`).value;
   let change = products.findIndex(a =>{
-    return a.id == item.id
+    return a.id == stock.id
   });
-  products[change] = {id: this.id, name: this.name, price: this.price, description: this.description};
+  products[change] =  Object.assign({}, this)
   localStorage.setItem("product-list", JSON.stringify(products));
   displayProduct();
-location.reload();
+  // location.reload();
 }
 
 // delete button
@@ -130,14 +128,14 @@ function displayProduct(){
       <td>R${stock.price}</td>
       <td>
       <div class="flex-wrap">
-      <img src="${stock.picture}" alt="${stock.id}" loading="lazy">
+      <img src='${stock.picture}' alt='z${stock.id}' loading="lazy">
       </div>
       </td>
       <td>${stock.description}</td>
       <td>
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target='#${stock.id}'>Edit</button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target='#admin${stock.id}'>Edit</button>
       <!-- Modal -->
-      <div class="modal fade" id='${stock.id}' tabindex="-1" aria-labelledby="editProductLabel " aria-hidden="true">
+      <div class="modal fade" id='admin${stock.id}' tabindex="-1" aria-labelledby="editProductLabel " aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
@@ -148,19 +146,19 @@ function displayProduct(){
             <form>
             <div class="container">
               <p>Name</p>
-              <input type="text" class="form-control" placeholder="Enter Title..." id="nameInput${stock.id}" value="${stock.name}" aria-label="Title" required>
+              <input type="text" class="form-control" placeholder="Enter Title..." id='nameInput${stock.id}' value='${stock.name}' aria-label="Title" required>
               <p>Price</p>
-              <input type="number" class="form-control" placeholder="Enter Your Amount..." id="priceInput${stock.id}" value="${stock.price}" aria-label="Price" required>
+              <input type="number" class="form-control" placeholder="Enter Your Amount..." id='priceInput${stock.id}' value='${stock.price}' aria-label="Price" required>
               <p>Picture</p>
-              <input type="text" class="form-control" placeholder="Enter Image URL..." id="pictureInput${stock.id}" value="${stock.picture}" aria-label="Picture" required>
+              <input type="text" class="form-control" placeholder="Enter Image URL..." id='pictureInput${stock.id}' value='${stock.picture}' aria-label="Picture" required>
               <p>Despcription</p>
-              <textarea class="form-control" placeholder="Enter Description..." id="descriptionInput${stock.id}" aria-label="Description" required>${stock.description}</textarea>
+              <textarea class="form-control" placeholder="Enter Description..." id='descriptionInput${stock.id}' aria-label="Description" required>${stock.description}</textarea>
               </div>
               </form>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-dark" id="edit-btn" onclick="new EditItem(${JSON.stringify(stock)})" data-bs-dismiss="modal">Edit Manga</button>
+              <button type="button" class="btn btn-dark" id="edit-btn" onclick='new EditItem(${JSON.stringify(stock)})' data-bs-dismiss="modal">Edit Manga</button>
             </div>
           </div>
         </div>
