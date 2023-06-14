@@ -46,7 +46,10 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
     )) 
 
 let divBooks = document.querySelector(".books");
+
+function displayManga(){
 try{
+    divBooks.innerHTML = "";
     products.forEach((reader)=> {
         divBooks.innerHTML += `
         <div class="cards-wrapper">
@@ -66,6 +69,21 @@ try{
         </div>
         `
     })
-}catch(e) {
+}catch(event) {
     location.reload()
 }
+};
+displayManga();
+
+// sorting
+let sortingItems = document.querySelector("#sorting");
+sortingItems.addEventListener("click", (event)=> {
+    event.preventDefault();
+    try{
+        if(products) alert("Come back later.")
+        products.sort((a,b)=> a.price - b.price);
+        displayManga();
+    }catch(event){
+        divBooks.innerHTML = event;
+    }
+})
