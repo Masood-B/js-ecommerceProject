@@ -14,7 +14,7 @@ console.log(products2)
         <img src="${stock.picture}" class="card-img-top" alt="${stock.name}"  loading="lazy" class="img-fluid">
         <div class="card-body">
           <h5 class="card-title">${stock.name}</h5>
-          <p class="lead card-text">${stock.description}</p>
+          <div class="overflow-auto"><p class="lead card-text">${stock.description}</p></div>
           <p class="lead card-text">Price: R${stock.price}</p>
           <a href="#" class="btn btn-primary" onclick='goToCart(${JSON.stringify(stock)})'>To Cart</a>
         </div>
