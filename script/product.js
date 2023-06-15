@@ -7,7 +7,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Monster Musume no Iru Nichijou",
         price: 400,
         picture:"https://i.postimg.cc/Xqc6mRbC/Monster-Musume-volume-1-cover.png",
-        description: "Snake girl and guy",
+        description: "In Asaka, Saitama, Kimihito Kurusu is a normal student who initially has no connection to the exchange program. However, when coordinator Kuroko Smith delivers the very scared and embarrassed Miia to his door by mistake, he cannot bring himself to send her away and allows her to live at his home, taking advantage of his parents' extended absence. As the story continues, Kimihito meets and gives shelter to other female liminals, each of a different species. Some arrive more or less by accident, while others are forced upon him by Smith or simply insinuate themselves into the house. Before long, Kimihito finds himself in a hectic environment, struggling to live in harmony with his new housemates while dealing with both their constant affectionate/romantic advances and the dramas of helping them get along in the human world. The situation takes on a new twist after he is told that because of expected changes in the law dealing with human-liminal relationships, he is expected to marry one of the girls as a test case, thus increasing their competition for his attention. However, as time passes, other liminal girls become attracted to him and begin to vie for his attention, much to Kimihito's embarrassment and the annoyance of his housemates.",
         date: new Date(),
         
         },
@@ -16,7 +16,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name: "No Game No Life",
         price: 500,
         picture:"https://i.postimg.cc/Wp6RNcBD/no-game-no-life-vol-1-2.jpg",
-        description: "Brother and sister",
+        description: "Sora and Shiro are two hikikomori stepsiblings who are known in the online gaming world as Blank, an undefeated group of gamers. One day, they are challenged to a game of chess by Tet, a god from another reality. The two are victorious and are offered to live in a world that centers around games. They accept, believing it to be a joke, and are summoned to a reality known as Disboard. There, a spell known as the Ten Covenants prevents the citizens of Disboard from inflicting harm on one another, forcing them to resolve their differences by gambling with games whose rules and rewards are magically enforced. In-game, rule enforcement only occurs when the method of cheating is acknowledged and outed by the opponent, allowing players to cheat through discreet methods. Sora and Shiro traverse to Elkia, the nation inhabited by humans, and befriend the duchess Stephanie Dola. Learning about Elkia's decline, the two participate in a tournament to determine the next ruler; after winning the crown, they earn the right to challenge the Disboard's other species as humanity's representative. Their next goal is to conquer all sixteen species in order to challenge Tet to a game; as of the sixth volume, five of the sixteen are under their control.",
         date: new Date()
         },
         {
@@ -24,7 +24,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Yuragi-sou no Yuuna-san",
         price: 300,
         picture:"https://i.postimg.cc/TPm7trGy/sk1g6a44e3121.jpg",
-        description: "Cat girl and human girl",
+        description: "The series follows the life of the luckless and homeless high school student Kogarashi Fuyuzora. In his search for a home, he is introduced to the Yuragi Inn, a cheap boarding house and former hot springs inn. The reason the rent is so cheap is because it is haunted by the beautiful ghost spirit Yuuna whose corpse was discovered at the inn. Kogarashi then helps Yuuna with her unfinished business, all while discovering the supernatural secrets of the rest of the female tenants.",
         date: new Date()
         },
         {
@@ -32,7 +32,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Saikin Yatotta Maid ga Ayashii",
         price: 350,
         picture:"https://i.postimg.cc/2jTH9jpx/the-maid-i-hired-recently-is-mysterious-vol-2.jpg",
-        description: "Maid",
+        description: "The maid Lilith, hired to look after young Yuuri and his family's mansion, seems highly suspicious: she is too good to be true. Every dish she serves turns out to be delicious, the whole residence sparkles after she cleans it, and all the clothing has given off a pleasant scent since she started doing the laundry. Furthermore, her devilishly beautiful eyes only serve to heighten Yuuri's suspicions. Is Lilith perhaps a witch or a sorcerer? Yuuri cannot figure it out. But despite his misgivings, Yuuri has to live with Lilith as he tries to unravel the mystery behind her otherworldly charm.",
         date: new Date()
         },
         {
@@ -40,7 +40,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Mato Seihei no Slave",
         price: 450,
         picture:"https://i.postimg.cc/QxwJvHfc/Volume-01.webp",
-        description: "School samurai girl",
+        description: "After his high school graduation, Yuuki Wakura realizes it has been five years since his sister's disappearance during a Mato disaster. Throughout Japan, mysterious entrances have opened to a dimension called Mato a demonic metropolis filled with disastrous monsters known as the Shuuki that threaten the safety of humans. However, a new hope arose, as the discovery of a Mato fruit that grants supernatural abilities exclusively to women allowed them to fight against the Shuuki. Due to this, a new matriarchal government was formed, establishing a female organization called the Anti-Demon Corps, which caused men to fall to the bottom of society. When Yuuki suddenly finds himself in Mato, he is unable to escape on his own. But just as he anticipates a gruesome end by the Shuuki, a girl in a militia outfit appears and protects him. As the chief of the Seventh Unit of the Anti-Demon Corps, Kyouka Uzen is ambitious yet devalued by her own peers due to her power being deemed unusual. Now in a life-or-death situation, Kyouka takes the opportunity to find out the true potential of her superpower by using Yuuki: in order to defeat the Shuuki, he has to become her slave.",
         date: new Date()
         },
         {
@@ -48,7 +48,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"To Love Ru Darkness",
         price: 450,
         picture:"https://i.postimg.cc/Fs6B882b/to-love-ru-darkness-vol-1.jpg",
-        description: "2 Alien girls",
+        description: "Rito Yuuki remains unsuccessful and indecisive with his love for his crush, Haruna Sairenji, and the alien princess, Lala Satalin Deviluke. Meanwhile, Lala's little sister Momo also falls in love with Rito and works on building a harem for him in hopes of giving herself a place in Rito's love life. To do so she enrolls in his school to secretly support all of Rito's love interests and even attempts to find him more, including the recently enrolled alien assassin Konjiki no Yami, also known as Yami, who puts off her next bounty because of him. However, Kurosaki Mea, Yami's little sister, intends for Yami to return to being an assassin.",
         date: new Date()
         },
         {
@@ -141,15 +141,14 @@ try{
         divBooks.innerHTML += `
    <div class="card" style="width: 15rem;">
   <img src="${reader.picture}" class="card-img-top" alt="${reader.name}"  loading="lazy" class="img-fluid">
-  <div class="card-body">
+  <div class="card-body overflow-auto">
     <h5 class="card-title">${reader.name}</h5>
     <p class="lead card-text">${reader.description}</p>
     <p class="lead card-text">Price: R${reader.price}</p>
     <a href="#" class="btn btn-primary" onclick='goToCart(${JSON.stringify(reader)})'>To Cart</a>
   </div>
 </div>
-        `
-        
+        ` 
     })
 }catch(event) {
     location.reload()
@@ -192,5 +191,6 @@ sortingItems.addEventListener("click", (event)=> {
     let checkout = []
     function goToCart(items){
         checkout.push(items);
-        localStorage.setItem("cart", JSON.stringify(checkout))
+        localStorage.setItem("cart", JSON.stringify(checkout));
+        // window.location.replace("checkout.html");
     }

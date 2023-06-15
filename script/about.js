@@ -20,7 +20,7 @@ aboutText.forEach((content)=>{
 let x = document.querySelector(".contact");
 x.innerHTML = 
 `
-<form class="content-move" action="https://formspree.io/f/xbjewvba" method="post"> <label>
+<form class="content-move" action="https://formspree.io/f/xbjewvba" method="post">
       
             <div class="container widespread">
               <form action="action_page.php">
@@ -40,6 +40,7 @@ x.innerHTML =
               <input type="submit" value="Submit" required></form>
               
             </form>
+            
 `;
 
 let y = document.querySelector(".my-info");
@@ -49,7 +50,7 @@ y.innerHTML =
 
 <p>Email: masoodbasardien123@gmail.com</p>
 
-<p>cellphone: 079 298 0631</p>
+<p>Cellphone: 079 298 0631</p>
 
 <p>Address: 14 Chapel Road, Harmony Village, Mitchell's Plain, 7785</p>
 `;
