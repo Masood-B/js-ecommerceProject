@@ -130,7 +130,7 @@ function displayProduct(){
       <td>R${stock.price}</td>
       <td>
       <div class="flex-wrap">
-      <img src='${stock.picture}' alt='z${stock.id}' loading="lazy">
+      <img src='${stock.picture}' alt='z${stock.id}' loading="lazy" class="img-fluid">
       </div>
       </td>
       <td>${stock.description}</td>
