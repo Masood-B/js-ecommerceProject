@@ -16,7 +16,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name: "No Game No Life",
         price: 500,
         picture:"https://i.postimg.cc/Wp6RNcBD/no-game-no-life-vol-1-2.jpg",
-        description: "brother and sister",
+        description: "Brother and sister",
         date: new Date()
         },
         {
@@ -24,7 +24,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Yuragi-sou no Yuuna-san",
         price: 300,
         picture:"https://i.postimg.cc/TPm7trGy/sk1g6a44e3121.jpg",
-        description: "cat girl and human girl",
+        description: "Cat girl and human girl",
         date: new Date()
         },
         {
@@ -32,7 +32,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Saikin Yatotta Maid ga Ayashii",
         price: 350,
         picture:"https://i.postimg.cc/2jTH9jpx/the-maid-i-hired-recently-is-mysterious-vol-2.jpg",
-        description: "maid",
+        description: "Maid",
         date: new Date()
         },
         {
@@ -40,7 +40,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Mato Seihei no Slave",
         price: 450,
         picture:"https://i.postimg.cc/QxwJvHfc/Volume-01.webp",
-        description: "school samurai girl",
+        description: "School samurai girl",
         date: new Date()
         },
         {
@@ -48,7 +48,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"To Love Ru Darkness",
         price: 450,
         picture:"https://i.postimg.cc/Fs6B882b/to-love-ru-darkness-vol-1.jpg",
-        description: "",
+        description: "2 Alien girls",
         date: new Date()
         },
         {
@@ -56,7 +56,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Keijo!!!!!!!!",
         price: 450,
         picture:"https://i.postimg.cc/Y9CWYrtQ/Volume-10.webp",
-        description: "",
+        description: "?",
         date: new Date()
         },
         {
@@ -64,7 +64,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Medoka Box ",
         price: 450,
         picture:"https://i.postimg.cc/SQV9Sz7V/Volume16.webp",
-        description: "",
+        description: "Friends and enemies enjoying themselves",
         date: new Date()
         },
         {
@@ -72,7 +72,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Is It Wrong to Try to Pick Up Girls in a Dungeon",
         price: 450,
         picture:"https://i.postimg.cc/T1pccY2z/is-it-wrong-to-try-to-pick-up-girls-in-a-dungeon-vol-6-manga-2.jpg",
-        description: "",
+        description: "Boy and girl",
         date: new Date()
         },
         {
@@ -80,7 +80,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Rosaria + Vampire",
         price: 450,
         picture:"https://i.postimg.cc/s2m9dZMF/Getimage-aspx.webp",
-        description: "",
+        description: "Human boy and vampire girl",
         date: new Date()
         },
         {
@@ -88,7 +88,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Food Wars!",
         price: 450,
         picture:"https://i.postimg.cc/9XKPh2Qf/food-wars-shokugeki-no-soma-vol-26-9781974701018-hr.jpg",
-        description: "",
+        description: "Girl chief how like reptile",
         date: new Date()
         },
         {
@@ -96,7 +96,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Air Gear",
         price: 450,
         picture:"https://i.postimg.cc/tRKvpwq9/air-gear-28.jpg",
-        description: "",
+        description: "Boy and his gang",
         date: new Date()
         },
         {
@@ -104,7 +104,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Kimi No Iru Machi",
         price: 450,
         picture:"https://i.postimg.cc/DzwBxKgP/9784063950298-us.jpg",
-        description: "",
+        description: "Girl is smiling",
         date: new Date()
         },
         {
@@ -112,7 +112,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"High School of The Dead",
         price: 450,
         picture:"https://i.postimg.cc/GpgzNSgw/9780316282598_p0_v1_s1200x630.jpg",
-        description: "",
+        description: "Girl fighting zombies",
         date: new Date()
         },
         {
@@ -120,7 +120,7 @@ let products = JSON.parse(localStorage.getItem('product-list')) ?
         name:"Love Hina",
         price: 450,
         picture:"https://i.postimg.cc/zBLp1S4L/1851952-09.jpg",
-        description: "",
+        description: "Group of girls",
         date: new Date()
         }
     ]
@@ -145,7 +145,7 @@ try{
     <h5 class="card-title">${reader.name}</h5>
     <p class="lead card-text">${reader.description}</p>
     <p class="lead card-text">Price: R${reader.price}</p>
-    <a href="#" class="btn btn-primary">To Cart</a>
+    <a href="#" class="btn btn-primary" onclick='goToCart(${JSON.stringify(reader)})'>To Cart</a>
   </div>
 </div>
         `
@@ -187,3 +187,10 @@ sortingItems.addEventListener("click", (event)=> {
     //   }
     //   displayProduct();
     // })
+
+    // checkout button
+    let checkout = []
+    function goToCart(items){
+        checkout.push(items);
+        localStorage.setItem("cart", JSON.stringify(checkout))
+    }
