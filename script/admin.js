@@ -46,7 +46,7 @@ const savePicture = document.querySelector("#input3"); // Picture input
 const saveDescription = document.querySelector("#input4"); // Description input
 const result = document.querySelector("#data") //display list
 let products = JSON.parse(localStorage.getItem('product-list')); // info
-let productID = products[products.length-1] ? products[products.length-1].id + 1: 1; // ID number
+let productID =   16   // products[products.length-1] ? products[products.length-1].id + 1: 1; // ID number
 let editBtn; // edit button
 
 // add button
@@ -58,13 +58,14 @@ function addItem(event){
         alert("You Forgot To Add!")
     }else{
         products.push({
-            id: products[products.length-1] ? products[products.length-1].id + 1: 1,
+            id: productID,     //products[products.length-1] ? products[products.length-1].id + 1: 1,
             name: saveName.value,
             price: savePrice.value ,
             picture: savePicture.value,
             description: saveDescription.value,
             date: new Date()
         });
+        productID++,
         saveName.value = "", savePrice.value = "", savePicture.value = "", saveDescription.value = "";
         localStorage.setItem("product-list", JSON.stringify(products));
         displayProduct();
